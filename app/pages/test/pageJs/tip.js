@@ -3,19 +3,29 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import goodsTpl from '../pageTpl/goods.tpl';
+import skuTpl from '../pageTpl/tip.tpl';
 
 let pageData = {
 	isFirstLoad: true,
 }
 
-var goodsJs = {
+// 弹框初始化属性
+const popup = Components.Popup.render({
+	equipment: 'MOBILE', // 移动端框
+	isShowCloseBtn: false,
+	animateIn: 'fadeIn',
+	animateOut: 'fadeOut',
+	animateTime: 200,
+});
+
+
+var tipJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('title_goods');
+		Api.Route.setDocumentTitle('tip');
 
-		let dom = template.compile(goodsTpl)({
+		let dom = template.compile(skuTpl)({
 			pageData: {
 				route: options.route,
 				animation: options.animation,
@@ -26,19 +36,22 @@ var goodsJs = {
 		if (options.cache) {
 			// 如果页面是需要缓存的
 			if ($page.length === 0) {
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			} else {
 				$page.show();
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
 			if ($page.length === 0) {
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			} else {
 				$page.remove();
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			}
 		}
+
+		// 如果有底部tab栏
+		Components.Footertab.choiceTab(options.route);
 
 		// 添加事件
 		if (pageData.isFirstLoad || !options.cache) this.initEvent(options);
@@ -50,12 +63,21 @@ var goodsJs = {
 		let self = this;
 		let $route = $(`.js-${options.route}`);
 
-		$route.on('click', 'button', (e) => {
-			alert('我被点击了')
+		$route.on('click', '.list li', (e) => {
+			let $btn = $(e.currentTarget);
+			let className = $btn.attr('class');
+
+			switch (className) {
+				case 'tip_1':
+					popup.tip({
+						body: '这是一个tip',
+					})
+					break;
+			}
 		})
 
 	}
 
 }
 
-export default goodsJs;
+export default tipJs;

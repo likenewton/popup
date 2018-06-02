@@ -3,19 +3,29 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import skuTpl from '../pageTpl/sku.tpl';
+import goodsTpl from '../pageTpl/confirm.tpl';
 
 let pageData = {
 	isFirstLoad: true,
 }
 
-var skuJs = {
+// 弹框初始化属性
+const popup = Components.Popup.render({
+	equipment: 'MOBILE', // 移动端框
+	isShowCloseBtn: false,
+	animateIn: 'fadeIn',
+	animateOut: 'fadeOut',
+	animateTime: 200,
+});
+
+
+var confirmJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('title_sku');
+		Api.Route.setDocumentTitle('confirm');
 
-		let dom = template.compile(skuTpl)({
+		let dom = template.compile(goodsTpl)({
 			pageData: {
 				route: options.route,
 				animation: options.animation,
@@ -26,19 +36,22 @@ var skuJs = {
 		if (options.cache) {
 			// 如果页面是需要缓存的
 			if ($page.length === 0) {
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			} else {
 				$page.show();
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
 			if ($page.length === 0) {
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			} else {
 				$page.remove();
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			}
 		}
+
+		// 如果有底部tab栏
+		Components.Footertab.choiceTab(options.route);
 
 		// 添加事件
 		if (pageData.isFirstLoad || !options.cache) this.initEvent(options);
@@ -50,12 +63,27 @@ var skuJs = {
 		let self = this;
 		let $route = $(`.js-${options.route}`);
 
-		$route.on('click', 'button', (e) => {
-			alert('我被点击了')
+		$route.on('click', '.list li', (e) => {
+			let $btn = $(e.currentTarget);
+			let className = $btn.attr('class');
+
+			switch (className) {
+				case 'confirm_1':
+					popup.confirm({
+						body: '移动端',
+					})
+					break;
+				case 'confirm_2':
+					popup.confirm({
+						equipment: 'COMPUTER',
+						body: 'pc端',
+					})
+					break;
+			}
 		})
 
 	}
 
 }
 
-export default skuJs;
+export default confirmJs;

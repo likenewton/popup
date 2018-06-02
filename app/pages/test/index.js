@@ -7,14 +7,15 @@ import Api from '../../base/api/api.js';
 import './style.scss';
 
 // ++++++++++++++++++++
-import homeJs from './pageJs/home.js';
-import skuJs from './pageJs/sku.js';
-import goodsJs from './pageJs/goods.js';
+import alertJs from './pageJs/alert.js';
+import confirmJs from './pageJs/confirm.js';
+import tipJs from './pageJs/tip.js';
+
 
 const pageJs = {
-	homeJs,
-	skuJs,
-	goodsJs,
+	alertJs,
+	confirmJs,
+	tipJs,
 }
 // ++++++++++++++++++++
 
@@ -26,32 +27,50 @@ const popup = Components.Popup.render({
 	animateOut: 'fadeOut',
 });
 
+const footertab = Components.Footertab.render({
+	list: [
+		{
+			title: 'ALERT',
+			route: 'alert',
+			active: true,
+		},
+		{
+			title: 'CONFIRM',
+			route: 'confirm',
+		},
+		{
+			title: 'TIP',
+			route: 'tip',
+		}
+	]
+})
+
 class Index {
 
 	constructor() {
 
 		this.data = { // 用来保存页面路由信息
 			A__PageRouteMap: {
-				home: {
-					route: 'home', // 路由名稱
+				alert: {
+					route: 'alert', // 路由名稱
 					cache: false, // 是否頁面緩存
 				},
-				sku: {
-					route: 'sku',
+				confirm: {
+					route: 'confirm',
 					cache: false,
 				},
-				goods: {
-					route: 'goods',
+				tip: {
+					route: 'tip',
 					cache: false,
 				}
 			},
 		}
-		this.init();
-		this.initEvent();
+		this._init();
+		this._initEvent();
 
 	}
 
-	init() {
+	_init() {
 		let self = this;
 
 		self.firstRender();
@@ -68,7 +87,7 @@ class Index {
 	}
 
 	// event
-	initEvent() {
+	_initEvent() {
 		let self = this;
 
 		$(document).on('click', 'a.js-link', (e) => {
@@ -120,7 +139,7 @@ class Index {
 		if (hash) {
 			location.href = location.href.substr(0, '#__') + '#__' + hash.split('__')[1];
 		} else {
-			location.href = location.href + '#__home';
+			location.href = location.href + '#__alert';
 		}
 	}
 

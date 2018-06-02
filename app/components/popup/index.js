@@ -11,7 +11,7 @@ export default class Popup {
         this.data = {
             componentName: 'Popup',
             dom: '.js-Popup',
-            version_dom: `.js-Popup-${new Date().getTime()}`, // 不同的popup 实例会有不同的version_dom 类名，这样每一个实例都会有属于自己的事件以及参数
+            version_dom: `.js-Popup-${new Date().getTime()}_${parseInt(Math.random() * 1000)}`, // 不同的popup 实例会有不同的version_dom 类名，这样每一个实例都会有属于自己的事件以及参数
             equipment: 'COMPUTER', // 默认是pc端样式 MOBILE(移动端)
             backBtn: true, // 默认点击弹框背景执行cancal 按钮
             okBtn: '确定', // ok 按钮文案

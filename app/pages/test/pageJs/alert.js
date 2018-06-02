@@ -3,7 +3,7 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import homeTpl from '../pageTpl/home.tpl';
+import homeTpl from '../pageTpl/alert.tpl';
 
 let pageData = {
 	isFirstLoad: true,
@@ -18,11 +18,11 @@ const popup = Components.Popup.render({
 	animateTime: 200,
 });
 
-var homeJs = {
+var alertJs = {
 
 	render(options) {
 		// 设置页面标题
-		Api.Route.setDocumentTitle('title_home');
+		Api.Route.setDocumentTitle('alert');
 
 		let dom = template.compile(homeTpl)({
 			pageData: {
@@ -35,19 +35,22 @@ var homeJs = {
 		if (options.cache) {
 			// 如果页面是需要缓存的
 			if ($page.length === 0) {
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			} else {
 				$page.show();
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
 			if ($page.length === 0) {
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			} else {
 				$page.remove();
-				$('body').append(dom);
+				$('.page-container').append(dom);
 			}
 		}
+
+		// 如果有底部tab栏
+		Components.Footertab.choiceTab(options.route);
 
 		// 添加事件(第一次加载||页面不需要设置缓存的时候)
 		if (pageData.isFirstLoad || !options.cache) this.initEvent(options);
@@ -156,26 +159,6 @@ var homeJs = {
 						],
 					})
 					break;
-
-
-				case 'confirm_1':
-					popup.confirm({
-						body: '移动端',
-					})
-					break;
-				case 'confirm_2':
-					popup.confirm({
-						equipment: 'COMPUTER',
-						body: 'pc端',
-					})
-					break;
-
-				case 'tip_1':
-					popup.tip({
-						body: '这是一个tip',
-					})
-					break;
-
 			}
 		})
 
@@ -183,4 +166,4 @@ var homeJs = {
 
 }
 
-export default homeJs;
+export default alertJs;

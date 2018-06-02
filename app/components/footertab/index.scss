@@ -1,0 +1,38 @@
+@import '../../base/style/border.scss';
+
+.js-Footertab {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    .footertab-content {
+        display: flex;
+        width: 100%;
+        .tab-item {   
+            flex: 1;
+            background: #fdfdfd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &.active {
+                background: #fa6466;
+                a {
+                    color: #fdfdfd;
+                }
+            }
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                color: #333;
+                height: 1.0rem;
+                .title {
+                    display: block;
+                    text-align: center;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

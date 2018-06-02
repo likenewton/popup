@@ -26,23 +26,6 @@ $(document).on('touchmove', (e) => {
         var page_w = win_doc_doc.clientWidth || 320;
         page_w > 750 && (page_w = 750),
           win_doc_doc.style.fontSize = page_w / psd_w + "px";
-
-        // 强制让玩家竖屏
-        if (window.orientation == 90 || window.orientation == -90) {
-          // 如果是橫屏
-          popup.alert({
-            body: '请竖屏体验游戏！',
-            okHide: () => {
-              return false;
-            },
-            cancelHide: () => {
-              return false;
-            }
-          })
-        } else {
-          $('.js-Popup').remove();
-        }
-
       };
     set_size();
     win_doc.addEventListener && (win.addEventListener(evt_fn, set_size, !1), win_doc.addEventListener("DOMContentLoaded", set_size, !1));
