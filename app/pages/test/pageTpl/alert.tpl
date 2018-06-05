@@ -1,4 +1,4 @@
-<div class="js-routePage js-{{pageData.route}}">
+<div class="js-routePage js-{{pageData.route}} animated {{pageData.animation}}">
     <ul class="list">	
 		<li class="alert_1">alert <span>这是默认的alert</span></li>
 		<li class="alert_2">alert <span>关闭前会有一个回调函数</span></li>
@@ -12,5 +12,6 @@
 		<li class="alert_10">alert <span>只要是animate.css动画属性你都可以运用</span></li>
 		<li class="alert_11">alert <span>弹框展示之后会有一个回调函数</span></li>
 		<li class="alert_12">alert <span>弹框里面的内容需要template渲染</span></li>
+		<li class="alert_13">alert <span>在取消按钮之后会有一个回调</span></li>
     </ul>
 </div>

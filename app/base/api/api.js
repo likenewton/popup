@@ -12,10 +12,6 @@ $(function() {
   FastClick.attach(document.body);
 });
 
-$(document).on('touchmove', (e) => {
-    e.preventDefault();
-  })
-
   // rem
   ! function(win) {
     var win_doc = win.document,

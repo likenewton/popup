@@ -7,19 +7,21 @@ import Api from '../../base/api/api.js';
 import './style.scss';
 
 // ++++++++++++++++++++
+import errJs from './pageJs/err.js';
 import alertJs from './pageJs/alert.js';
 import confirmJs from './pageJs/confirm.js';
 import tipJs from './pageJs/tip.js';
 
 
 const pageJs = {
+	errJs,
 	alertJs,
 	confirmJs,
 	tipJs,
 }
 // ++++++++++++++++++++
 
-const popup = Components.Popup.render({
+const popup = Components.Popup.render({ 
 	equipment: 'MOBILE', // 移动端框
 	isShowCloseBtn: false,
 	animateTime: 200,
@@ -27,6 +29,7 @@ const popup = Components.Popup.render({
 	animateOut: 'fadeOut',
 });
 
+// 頁腳tab欄組件
 const footertab = Components.Footertab.render({
 	list: [
 		{
@@ -45,23 +48,37 @@ const footertab = Components.Footertab.render({
 	]
 })
 
+// 頁面動畫配置 ['進入動畫', '消失動畫']
+const ANIMATE_INFOS = [
+	[], // 沒有動畫
+	['fadeInRightBig', 'fadeOutLeftBig'],
+]
+
 class Index {
 
 	constructor() {
 
-		this.data = { // 用来保存页面路由信息
-			A__PageRouteMap: {
+		this.data = { 
+			A__PageRouteMap: { // 用来保存页面路由信息
 				alert: {
 					route: 'alert', // 路由名稱
-					cache: false, // 是否頁面緩存
+					cache: true, // 是否頁面緩存
+					animation: ANIMATE_INFOS[1], // 頁面出場/消失動畫
 				},
 				confirm: {
 					route: 'confirm',
-					cache: false,
+					cache: true,
+					animation: ANIMATE_INFOS[1],
 				},
 				tip: {
 					route: 'tip',
-					cache: false,
+					cache: true,
+					animation: ANIMATE_INFOS[1],
+				},
+				err: {
+					route: 'err',
+					cache: true,
+					animation: ANIMATE_INFOS[1],
 				}
 			},
 		}
@@ -80,7 +97,7 @@ class Index {
 			let hash = Api.Tool.getHash();
 			if (hash) {
 				let route = hash.split('__')[1];
-				self.pageChangeRender(self.data['A__PageRouteMap'][route]);
+				self.pageChangeRender(self.data.A__PageRouteMap[route] || self.data.A__PageRouteMap['err']);
 			}
 		});
 
@@ -108,7 +125,6 @@ class Index {
 		let routeName = $btn.attr('data-route');
 
 		if (!routeName) {
-			console.log(popup)
 			popup.alert({
 				title: '错误',
 				body: '路由名称不存在',
@@ -126,7 +142,12 @@ class Index {
 		let self = this;
 
 		//加载页面渲染方法
-		$('.js-routePage').hide();
+		$('.js-routePage').removeClass(options.animation[0]).addClass(options.animation[1]);
+		if (options.animation[0]) {
+			$('.js-routePage').fadeOut(420);
+		} else {
+			$('.js-routePage').hide();
+		}
 		// ++++++++++++++++++++
 		pageJs[`${options.route}Js`].render(options);
 		// ++++++++++++++++++++
@@ -135,10 +156,14 @@ class Index {
 	// 页面第一次加载
 	firstRender() {
 		let hash = Api.Tool.getHash();
+		let route = hash.split('__')[1];
 
 		if (hash) {
-			location.href = location.href.substr(0, '#__') + '#__' + hash.split('__')[1];
+			// 如果找不到指定的route, 就跳转404页面
+			route = this.data.A__PageRouteMap[route] ?  route : 'err';
+			location.href = location.href.substr(0, '#__') + '#__' + route;
 		} else {
+			// 在没有路由时默认添加一个路由地址
 			location.href = location.href + '#__alert';
 		}
 	}

@@ -27,7 +27,7 @@ var alertJs = {
 		let dom = template.compile(homeTpl)({
 			pageData: {
 				route: options.route,
-				animation: options.animation,
+				animation: options.animation[0],
 			}
 		})
 
@@ -37,7 +37,7 @@ var alertJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.show();
+				$page.removeClass(options.animation[1]).addClass(options.animation[0]).show();
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
@@ -50,7 +50,12 @@ var alertJs = {
 		}
 
 		// 如果有底部tab栏
-		Components.Footertab.choiceTab(options.route);
+		if ($('.js-Footertab').length > 0) {
+			Components.Footertab.choiceTab(options.route);
+			$(`.js-${options.route}`).css({
+				paddingBottom: $('.js-Footertab').height(),
+			});
+		}
 
 		// 添加事件(第一次加载||页面不需要设置缓存的时候)
 		if (pageData.isFirstLoad || !options.cache) this.initEvent(options);
@@ -116,21 +121,21 @@ var alertJs = {
 						equipment: 'COMPUTER',
 						body: '我是PC端的弹框, 其他效果可以与移动端一样配置',
 					})
-					break; 
+					break;
 				case 'alert_8':
 					popup.alert({
 						equipment: 'COMPUTER',
 						isShowCloseBtn: true,
 						body: '我是PC端的弹框, 加了关闭的x',
 					})
-					break; 
+					break;
 				case 'alert_9':
 					popup.alert({
 						equipment: 'COMPUTER',
 						isShowBackground: false,
 						body: '我是PC端的弹框, 没有遮罩层哦',
 					})
-					break; 
+					break;
 				case 'alert_10':
 					popup.alert({
 						equipment: 'COMPUTER',
@@ -139,7 +144,7 @@ var alertJs = {
 						body: '只要是animate.css动画属性你都可以运用',
 						animateTime: 800,
 					})
-					break; 
+					break;
 				case 'alert_11':
 					popup.alert({
 						equipment: 'COMPUTER',
@@ -152,11 +157,25 @@ var alertJs = {
 				case 'alert_12':
 					popup.alert({
 						body: '弹框里面的内容需要template渲染 {{each data as item}}<p>{{item.name}}的age是{{item.age}}</p>{{/each}}',
-						tplData: [
-							{name: 'Newton', age: 20},
-							{name: 'Lucy', age: 30},
-							{name: 'Tom', age: 40},
-						],
+						tplData: [{
+							name: 'Newton',
+							age: 20
+						}, {
+							name: 'Lucy',
+							age: 30
+						}, {
+							name: 'Tom',
+							age: 40
+						}, ],
+					})
+					break;
+				case 'alert_13':
+					popup.confirm({
+						equipment: 'COMPUTER',
+						body: '在取消按钮之后会有一个回调',
+						cancelHiden() {
+							alert('我被取消了')
+						}
 					})
 					break;
 			}

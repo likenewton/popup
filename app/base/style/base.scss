@@ -103,4 +103,31 @@ li {
 }
 
 
+.page-container {
+    position: relative;
+    .js-routePage {
+        position: absolute;
+        top: 0;
+        width: 100%;    
+        animation-duration: 0.42s !important;
+    }
+    .js-err {
+        overflow: hidden;
+        .title {
+            position: relative;
+            text-align: center;
+            font-size: 1.0rem;
+            color: #ccc;
+            margin-top: 25%;
+        }
+        .content {
+            text-align: center;
+            font-size: 0.4rem;
+            color: #ccc;
+            letter-spacing: 0.02rem;
+        }
+    }
+}
+
+
 

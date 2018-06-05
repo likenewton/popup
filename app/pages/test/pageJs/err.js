@@ -3,7 +3,7 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import skuTpl from '../pageTpl/tip.tpl';
+import pageTpl from '../pageTpl/err.tpl';
 
 let pageData = {
 	isFirstLoad: true,
@@ -19,16 +19,16 @@ const popup = Components.Popup.render({
 });
 
 
-var tipJs = {
+var errJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('tip');
+		Api.Route.setDocumentTitle('error');
 
-		let dom = template.compile(skuTpl)({
+		let dom = template.compile(pageTpl)({
 			pageData: {
 				route: options.route,
-				animation: options.animation[0],
+				animation: options.animation,
 			}
 		})
 
@@ -38,7 +38,7 @@ var tipJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.removeClass(options.animation[1]).addClass(options.animation[0]).show();
+				$page.show();
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
@@ -63,21 +63,8 @@ var tipJs = {
 		let self = this;
 		let $route = $(`.js-${options.route}`);
 
-		$route.on('click', '.list li', (e) => {
-			let $btn = $(e.currentTarget);
-			let className = $btn.attr('class');
-
-			switch (className) {
-				case 'tip_1':
-					popup.tip({
-						body: '这是一个tip',
-					})
-					break;
-			}
-		})
-
 	}
 
 }
 
-export default tipJs;
+export default errJs;

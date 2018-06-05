@@ -45,8 +45,6 @@ export default class Footertab {
             $(data.dom).html(this.$box);
         }
 
-        $('.page-container').css('marginBottom', $(data.dom).height());
-
     }
 
     _addEvents() {

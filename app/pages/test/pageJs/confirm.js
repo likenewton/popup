@@ -28,7 +28,7 @@ var confirmJs = {
 		let dom = template.compile(goodsTpl)({
 			pageData: {
 				route: options.route,
-				animation: options.animation,
+				animation: options.animation[0],
 			}
 		})
 
@@ -38,7 +38,7 @@ var confirmJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.show();
+				$page.removeClass(options.animation[1]).addClass(options.animation[0]).show();
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
