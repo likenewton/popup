@@ -3,7 +3,7 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import homeTpl from '../pageTpl/alert.tpl';
+import pageTpl from '../pageTpl/alert.tpl';
 
 let pageData = {
 	isFirstLoad: true,
@@ -19,12 +19,12 @@ const popup = Components.Popup.render({
 });
 
 var alertJs = {
-
+	// 每一次hash 的跳轉都會執行(並且只會執行render)一次
 	render(options) {
 		// 设置页面标题
 		Api.Route.setDocumentTitle('alert');
 
-		let dom = template.compile(homeTpl)({
+		let dom = template.compile(pageTpl)({
 			pageData: {
 				route: options.route,
 				animation: options.animation[0],
@@ -37,7 +37,7 @@ var alertJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.removeClass(options.animation[1]).addClass(options.animation[0]).show();
+				$page.removeClass(options.animation[1]).addClass(options.animation[0]).fadeIn(420);
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
@@ -49,13 +49,27 @@ var alertJs = {
 			}
 		}
 
-		// 如果有底部tab栏
+		// +++++++++++++++++++++ 如果需要加载下拉刷新
+		if (pageData.isFirstLoad || !options.cache) {
+			Components.Refresh.render({
+				parent: `.js-${options.route}`,
+				cb() {
+					popup.alert({
+						body: 'alert cb'
+					})
+				}
+			});
+		}
+		// +++++++++++++++++++++++++++++++++++++++++++++
+
+		// +++++++++++++++++++++ 如果有底部tab栏
 		if ($('.js-Footertab').length > 0) {
 			Components.Footertab.choiceTab(options.route);
 			$(`.js-${options.route}`).css({
 				paddingBottom: $('.js-Footertab').height(),
 			});
 		}
+		// +++++++++++++++++++++++++++++++++++++++++++++
 
 		// 添加事件(第一次加载||页面不需要设置缓存的时候)
 		if (pageData.isFirstLoad || !options.cache) this.initEvent(options);

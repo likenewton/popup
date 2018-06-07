@@ -21,7 +21,8 @@ const pageJs = {
 }
 // ++++++++++++++++++++
 
-const popup = Components.Popup.render({ 
+// 彈框組件
+const popup = Components.Popup.render({
 	equipment: 'MOBILE', // 移动端框
 	isShowCloseBtn: false,
 	animateTime: 200,
@@ -29,23 +30,21 @@ const popup = Components.Popup.render({
 	animateOut: 'fadeOut',
 });
 
+const load = Components.Loading.render();
+
 // 頁腳tab欄組件
 const footertab = Components.Footertab.render({
-	list: [
-		{
-			title: 'ALERT',
-			route: 'alert',
-			active: true,
-		},
-		{
-			title: 'CONFIRM',
-			route: 'confirm',
-		},
-		{
-			title: 'TIP',
-			route: 'tip',
-		}
-	]
+	list: [{
+		title: 'ALERT',
+		route: 'alert',
+		active: true,
+	}, {
+		title: 'CONFIRM',
+		route: 'confirm',
+	}, {
+		title: 'TIP',
+		route: 'tip',
+	}]
 })
 
 // 頁面動畫配置 ['進入動畫', '消失動畫']
@@ -58,7 +57,7 @@ class Index {
 
 	constructor() {
 
-		this.data = { 
+		this.data = {
 			A__PageRouteMap: { // 用来保存页面路由信息
 				alert: {
 					route: 'alert', // 路由名稱
@@ -160,7 +159,7 @@ class Index {
 
 		if (hash) {
 			// 如果找不到指定的route, 就跳转404页面
-			route = this.data.A__PageRouteMap[route] ?  route : 'err';
+			route = this.data.A__PageRouteMap[route] ? route : 'err';
 			location.href = location.href.substr(0, '#__') + '#__' + route;
 		} else {
 			// 在没有路由时默认添加一个路由地址

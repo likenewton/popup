@@ -1,6 +1,5 @@
 import template from 'art-template/dist/template.js';
 import $ from 'jquery/dist/jquery.min';
-import FastClick from 'fastclick';
 import tpl from './popup.tpl';
 import './index.scss';
 

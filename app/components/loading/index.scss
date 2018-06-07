@@ -1,0 +1,13 @@
+
+.js-Loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 0.6rem;
+    height: 0.6rem;
+    transform: translate3d(-50%, -50%, 0);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;
+    z-index: 999;
+}

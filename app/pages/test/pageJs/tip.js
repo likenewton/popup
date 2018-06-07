@@ -38,7 +38,7 @@ var tipJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.removeClass(options.animation[1]).addClass(options.animation[0]).show();
+				$page.removeClass(options.animation[1]).addClass(options.animation[0]).fadeIn(420);
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍

@@ -38,7 +38,7 @@ var confirmJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.removeClass(options.animation[1]).addClass(options.animation[0]).show();
+				$page.removeClass(options.animation[1]).addClass(options.animation[0]).fadeIn(420);
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
@@ -49,6 +49,19 @@ var confirmJs = {
 				$('.page-container').append(dom);
 			}
 		}
+
+		// +++++++++++++++++++++ 如果需要加载下拉刷新
+		if (pageData.isFirstLoad || !options.cache) {
+			Components.Refresh.render({
+				parent: `.js-${options.route}`,
+				cb() {
+					popup.alert({
+						body: 'confirm cb'
+					})
+				}
+			});
+		}
+		// ++++++++++++++++++++++++++++++++++++++++++
 
 		// 如果有底部tab栏
 		Components.Footertab.choiceTab(options.route);
