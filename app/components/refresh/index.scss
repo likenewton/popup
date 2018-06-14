@@ -1,8 +1,8 @@
 
 .js-Refresh {
 	position: relative;
-    height: 5.0rem;
-    transform: translateY(-5.0rem);
+    height: 2.5rem;
+    transform: translateY(-2.5rem);
     .inner {
     	position: absolute;
     	bottom: 0;
@@ -12,4 +12,8 @@
     	line-height: 1.5rem;
     	color: #ccc;
     }
+}
+
+.css-refresh {
+    transform: translateY(-2.5rem);
 }

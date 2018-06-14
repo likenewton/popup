@@ -20,6 +20,47 @@ ul.list {
 	}
 }
 
-.css-refresh {
-	transform: translateY(-5.0rem);
+.swiper-wrapper {
+	display: flex;
+	width: 100%;
+	// justify-content: space-around;
+	.swiper {
+		display: inline-block;
+		 width: 50%;
+	}
+}
+
+.js-blogs {
+	.article {
+		padding: 0.15rem;
+		.php_form {
+			input {
+				height: 0.52rem;
+				line-height: 0.44rem;
+				vertical-align: top;
+			}
+			label {
+				height: 0.42rem;
+				line-height: 0.42rem;
+			}
+			textarea {
+				border: 1px solid #ccc;
+				border-radius: 0.1rem;
+			}
+			input {
+				padding: 0.04rem 0.08rem;
+				border: 1px solid #ccc;
+			}
+		}
+		.php_form_item {
+			display: flex;
+			margin: 0.15rem 0;
+		}
+		.message-list {
+			.uname {
+				color: #007bff;
+				font-size: bold;
+			}
+		}
+	}
 }

@@ -12,25 +12,62 @@
             flex: 1;
             background: #fdfdfd;
             display: flex;
-            justify-content: center;
-            align-items: center;
             &.active {
-                background: #fa6466;
+                color: #fa6466;
                 a {
-                    color: #fdfdfd;
+                    color: #fa6466;
                 }
             }
+
+            // flex 布局存在兼容性
+            // a {
+            //     display: flex;
+            //     flex-direction: column;
+            //     justify-content: center;
+            //     align-items: center;
+            //     width: 100%;
+            //     color: #333;
+            //     height: 1.0rem;
+            //     font-size: 0.2rem;
+            //     .iconfont {
+            //         height: 0.54rem;
+            //         font-size: 0.5rem !important;
+            //     }
+            //     .title {
+            //         display: block;
+            //         width: 100%;
+            //         text-align: center;
+            //         height: 0.32rem;
+            //         font-size: 0.2rem !important;
+            //     }
+            // }
+
             a {
-                display: flex;
-                justify-content: center;
-                align-items: center;
+                flex: 1;
+                position: relative;
                 width: 100%;
                 color: #333;
                 height: 1.0rem;
-                .title {
+                font-size: 0.2rem;
+                .iconfont {
+                    position: absolute;
                     display: block;
-                    text-align: center;
                     width: 100%;
+                    text-align: center;
+                    height: 0.54rem;
+                    top: 0.05rem;
+                    left: 0;
+                    font-size: 0.5rem !important;
+                }
+                .title {
+                    position: absolute;
+                    position: block;
+                    width: 100%;
+                    text-align: center;
+                    height: 0.32rem;
+                    left: 0;
+                    bottom: 0.05rem;
+                    font-size: 0.2rem !important;
                 }
             }
         }

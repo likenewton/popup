@@ -9,15 +9,17 @@ import './style.scss';
 // ++++++++++++++++++++
 import errJs from './pageJs/err.js';
 import alertJs from './pageJs/alert.js';
-import confirmJs from './pageJs/confirm.js';
+import blogsJs from './pageJs/blogs.js';
 import tipJs from './pageJs/tip.js';
+import swiperJs from './pageJs/swiper.js';
 
 
 const pageJs = {
 	errJs,
 	alertJs,
-	confirmJs,
+	blogsJs,
 	tipJs,
+	swiperJs,
 }
 // ++++++++++++++++++++
 
@@ -37,13 +39,20 @@ const footertab = Components.Footertab.render({
 	list: [{
 		title: 'ALERT',
 		route: 'alert',
+		icon: 'icon-home',
 		active: true,
 	}, {
-		title: 'CONFIRM',
-		route: 'confirm',
+		title: 'BLOGS',
+		route: 'blogs',
+		icon: 'icon-user',
+	}, {
+		title: 'SWIPER',
+		route: 'swiper',
+		icon: 'icon-heart',
 	}, {
 		title: 'TIP',
 		route: 'tip',
+		icon: 'icon-setting',
 	}]
 })
 
@@ -51,6 +60,8 @@ const footertab = Components.Footertab.render({
 const ANIMATE_INFOS = [
 	[], // 沒有動畫
 	['fadeInRightBig', 'fadeOutLeftBig'],
+	['fadeInRight', 'fadeOutLeft'],
+	['slideInRight', 'slideOutLeft'],
 ]
 
 class Index {
@@ -62,22 +73,27 @@ class Index {
 				alert: {
 					route: 'alert', // 路由名稱
 					cache: true, // 是否頁面緩存
-					animation: ANIMATE_INFOS[1], // 頁面出場/消失動畫
+					animation: ANIMATE_INFOS[2], // 頁面出場/消失動畫
 				},
-				confirm: {
-					route: 'confirm',
+				blogs: {
+					route: 'blogs',
 					cache: true,
-					animation: ANIMATE_INFOS[1],
+					animation: ANIMATE_INFOS[2],
 				},
 				tip: {
 					route: 'tip',
 					cache: true,
-					animation: ANIMATE_INFOS[1],
+					animation: ANIMATE_INFOS[2],
+				},
+				swiper: {
+					route: 'swiper',
+					cache: true,
+					animation: ANIMATE_INFOS[2],
 				},
 				err: {
 					route: 'err',
 					cache: true,
-					animation: ANIMATE_INFOS[1],
+					animation: ANIMATE_INFOS[0],
 				}
 			},
 		}

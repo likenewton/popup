@@ -10,14 +10,13 @@ export default class Ajax {
 
     this.urlData = {
       // 存放ajax地址
-      getBindTel: '/frontend/getBindTel', // 获取绑定的手机号
-      telLogin: '/frontend/telLogin', // 绑定手机
-      getMsgValidCode: '/frontend/getNewMsgValidCode', // 获取短信验证码
+      getPhp: '/php_test/test_1.php',
+      getMsg: '/php_test/getMsg.php',
     }
 
     this.domain = {
       default: '', // 默认使用的域名
-      localhost: 'http://123.207.111.90:8081',
+      localhost: 'http://192.168.30.213:8088',
     }
 
     this.setData(param);
@@ -101,7 +100,7 @@ export default class Ajax {
 
     if (typeof res == 'string') res = JSON.parse(res);
 
-    if (res.res === 0 && !res.msg) {
+    if (res.res === 0) {
       sucCb && sucCb(res);
     } else {
       if (errCb) { // 单独类型的错误回调优先级高于实例化参数中的错误回调

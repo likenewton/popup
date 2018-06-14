@@ -37,7 +37,12 @@ var alertJs = {
 			if ($page.length === 0) {
 				$('.page-container').append(dom);
 			} else {
-				$page.removeClass(options.animation[1]).addClass(options.animation[0]).fadeIn(420);
+				$page.removeClass(options.animation[1]).addClass(options.animation[0]);
+				if (options.animation[0]) {
+					$page.fadeIn(420);
+				} else {
+					$page.show();
+				}
 			}
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍

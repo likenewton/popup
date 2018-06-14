@@ -3,7 +3,7 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import skuTpl from '../pageTpl/tip.tpl';
+import pageTpl from '../pageTpl/swiper.tpl';
 
 let pageData = {
 	isFirstLoad: true,
@@ -19,13 +19,13 @@ const popup = Components.Popup.render({
 });
 
 
-var tipJs = {
+var swiperJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('tip');
+		Api.Route.setDocumentTitle('swiper');
 
-		let dom = template.compile(skuTpl)({
+		let dom = template.compile(pageTpl)({
 			pageData: {
 				route: options.route,
 				animation: options.animation[0],
@@ -68,21 +68,53 @@ var tipJs = {
 		let self = this;
 		let $route = $(`.js-${options.route}`);
 
-		$route.on('click', '.list li', (e) => {
-			let $btn = $(e.currentTarget);
-			let className = $btn.attr('class');
-
-			switch (className) {
-				case 'tip_1':
-					popup.tip({
-						body: '这是一个tip',
-					})
-					break;
+		// 下拉刷新
+		Components.Refresh.render({
+			parent: `.js-${options.route}`,
+			cb() {
+				popup.alert({
+					body: 'confirm cb'
+				})
 			}
+		});
+
+		// 轮播图
+		Components.Swiper.render({
+			dom: '.js-Swiper',
+			effect: 'coverflow',
+			slidesPerView: 2,
+			imgList: [
+				`${require('../../../static/img/test/carousel_01.png')}`,
+				`${require('../../../static/img/test/carousel_02.png')}`,
+				`${require('../../../static/img/test/carousel_03.png')}`,
+			],
+		})
+		Components.Swiper.render({
+			dom: '.js-Swiper_1',
+			effect: 'cube',
+			imgList: [
+				`${require('../../../static/img/test/banner_01.png')}`,
+				`${require('../../../static/img/test/banner_02.jpg')}`,
+			]
+		})
+		Components.Swiper.render({
+			dom: '.js-Swiper_2',
+			effect: 'flip',
+			imgList: [
+				`${require('../../../static/img/test/banner_01.png')}`,
+				`${require('../../../static/img/test/banner_02.jpg')}`,
+			]
+		})
+		Components.Swiper.render({
+			dom: '.js-Swiper_3',
+			imgList: [
+				`${require('../../../static/img/test/banner_01.png')}`,
+				`${require('../../../static/img/test/banner_02.jpg')}`,
+			]
 		})
 
 	}
 
 }
 
-export default tipJs;
+export default swiperJs;

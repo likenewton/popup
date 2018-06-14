@@ -3,7 +3,7 @@ import $ from 'jquery/dist/jquery.min';
 import Components from '../../../components'; // 调用组件模块
 import Api from '../../../base/api/api.js';
 // 导入页面
-import skuTpl from '../pageTpl/tip.tpl';
+import goodsTpl from '../pageTpl/blogs.tpl';
 
 let pageData = {
 	isFirstLoad: true,
@@ -18,14 +18,23 @@ const popup = Components.Popup.render({
 	animateTime: 200,
 });
 
+const ajax = Components.Ajax.render({
+	domain: 'localhost',
+	errCb(res) {
+		popup.alert({
+			body: res.msg || '未知错误',
+		})
+	}
+})
 
-var tipJs = {
+
+var blogsJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('tip');
+		Api.Route.setDocumentTitle('blogs');
 
-		let dom = template.compile(skuTpl)({
+		let dom = template.compile(goodsTpl)({
 			pageData: {
 				route: options.route,
 				animation: options.animation[0],
@@ -48,12 +57,14 @@ var tipJs = {
 		} else {
 			// 如果页面不需要缓存，每次加载路由都更新一遍
 			if ($page.length === 0) {
-				$('.page-container').append(dom);
+				$('.page-container').append(dom); 
 			} else {
 				$page.remove();
 				$('.page-container').append(dom);
 			}
 		}
+
+		// ++++++++++++++++++++++++++++++++++++++++++
 
 		// 如果有底部tab栏
 		Components.Footertab.choiceTab(options.route);
@@ -68,21 +79,57 @@ var tipJs = {
 		let self = this;
 		let $route = $(`.js-${options.route}`);
 
-		$route.on('click', '.list li', (e) => {
-			let $btn = $(e.currentTarget);
-			let className = $btn.attr('class');
-
-			switch (className) {
-				case 'tip_1':
-					popup.tip({
-						body: '这是一个tip',
-					})
-					break;
+		Components.Refresh.render({
+			parent: `.js-${options.route}`,
+			cb() {
+				popup.alert({
+					body: 'confirm cb',
+				})
 			}
+		});
+
+		$route.on('click', '#btn-submit', (e) => {
+
+			ajax.comAjax({
+				URL: ajax.urlData.getPhp,
+				isStringify: true,
+				name: $('#uname').val(),
+				content: $('#umsg').val(),
+			}, (res) => {
+				console.log(res);
+				popup.tip({
+					body: '提交成功',
+				})
+				self.getMessage(options);
+			})
+
 		})
 
+		self.getMessage(options);
+
+	},
+
+
+	// function
+	getMessage(options) {
+		ajax.comAjax({
+			URL: ajax.urlData.getMsg,
+			isStringify: true,
+		}, (res) => {
+			console.log(res);
+
+			let templateStr = `{{each data as item index}}<li class="li-item">
+                    <div class="uname">{{item.name}}:</div>
+                    <div class="umsg">{{item.message}}</div>
+                    <hr>
+                </li>{{/each}}`;
+
+			$('.message-list').html(template.compile(templateStr)({data: res.data}));
+			$('.php_form input').val('');
+			$('.php_form textarea').val('');
+		})
 	}
 
 }
 
-export default tipJs;
+export default blogsJs;

@@ -51,6 +51,11 @@ function getPlugins(viewPath) {
     names: ['common', 'manifest'],
     minChunks: 2,
   })]
+  
+  pluginMap = [...pluginMap, new CopyWebpackPlugin([{
+	from: path.resolve(__dirname, 'app/static/php'),
+	to: path.resolve(__dirname, 'build/php'),
+  }])]
 
   pluginMap = [...pluginMap, new ExtractTextPlugin('[name].css')]
 
