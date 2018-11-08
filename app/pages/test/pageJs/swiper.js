@@ -6,7 +6,7 @@ import Api from '../../../base/api/api.js';
 import pageTpl from '../pageTpl/swiper.tpl';
 
 let pageData = {
-	isFirstLoad: true,
+	isFirstLoad: true, // 默认页面是第一次加载
 }
 
 // 弹框初始化属性
@@ -25,6 +25,7 @@ var swiperJs = {
 
 		Api.Route.setDocumentTitle('swiper');
 
+		// dom 此时只是简单的html字符串
 		let dom = template.compile(pageTpl)({
 			pageData: {
 				route: options.route,
@@ -58,7 +59,7 @@ var swiperJs = {
 		// 如果有底部tab栏
 		Components.Footertab.choiceTab(options.route);
 
-		// 添加事件
+		// 添加事件(只在第一次页面加载的时候或者页面cache == false的时候)
 		if (pageData.isFirstLoad || !options.cache) this.initEvent(options);
 	},
 
@@ -73,7 +74,7 @@ var swiperJs = {
 			parent: `.js-${options.route}`,
 			cb() {
 				popup.alert({
-					body: 'confirm cb'
+					body: '下载刷新成功！'
 				})
 			}
 		});
@@ -84,9 +85,11 @@ var swiperJs = {
 			effect: 'coverflow',
 			slidesPerView: 2,
 			imgList: [
-				`${require('../../../static/img/test/carousel_01.png')}`,
-				`${require('../../../static/img/test/carousel_02.png')}`,
-				`${require('../../../static/img/test/carousel_03.png')}`,
+				`${require('../../../static/img/test/carousel_04.jpg')}`,
+				`${require('../../../static/img/test/carousel_05.jpg')}`,
+				`${require('../../../static/img/test/carousel_06.jpg')}`,
+				`${require('../../../static/img/test/carousel_07.jpg')}`,
+				`${require('../../../static/img/test/carousel_08.jpg')}`,
 			],
 		})
 		Components.Swiper.render({

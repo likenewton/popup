@@ -1,12 +1,11 @@
 'use strict';
 
-import template from 'art-template/dist/template.js';
 import $ from 'jquery/dist/jquery.min';
 import Components from '../../components'; // 调用组件模块
 import Api from '../../base/api/api.js';
 import './style.scss';
 
-// ++++++++++++++++++++
+// ++++++++ 第一级子页的js +++++++++
 import errJs from './pageJs/err.js';
 import alertJs from './pageJs/alert.js';
 import blogsJs from './pageJs/blogs.js';
@@ -179,7 +178,7 @@ class Index {
 			location.href = location.href.substr(0, '#__') + '#__' + route;
 		} else {
 			// 在没有路由时默认添加一个路由地址
-			location.href = location.href + '#__alert';
+			location.href = location.href + '#__swiper';
 		}
 	}
 

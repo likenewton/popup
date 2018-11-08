@@ -3,10 +3,7 @@ import $ from 'jquery/dist/jquery.min';
 import tpl from './swiper.tpl';
 import './index.scss';
 
-/* 添加refresh 组件步骤
- * 1、js文件(render函数中)执行 Components.Refresh.render
- * 2、html(相应元素)添加css-refresh类名
- */
+
 export default class Swiper_1 {
 
     constructor(paraObj) {
@@ -14,7 +11,7 @@ export default class Swiper_1 {
             dom: '.js-Swiper',
             // self-config
             isShowBtn: false, // 默认不显示左右按钮
-            isShowPagination: false,
+            isShowPagination: false, // 默认不显示导航栏
             // swiper-config
             effect: 'slide', // slide,fade,cube,flip
             slidesPerView: 1,
