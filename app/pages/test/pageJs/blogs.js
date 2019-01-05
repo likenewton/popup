@@ -32,7 +32,7 @@ var blogsJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('blogs');
+		Api.Route.setDocumentTitle('Blogs');
 
 		let dom = template.compile(goodsTpl)({
 			pageData: {

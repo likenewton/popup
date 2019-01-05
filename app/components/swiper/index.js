@@ -25,8 +25,8 @@ export default class Swiper_1 {
                 resistanceRatio: 0,
             },
             cubeEffect: {
-                slideShadows: true,
-                shadow: true,
+                slideShadows: false,
+                shadow: false,
                 shadowOffset: 100,
                 shadowScale: 0.6
             },

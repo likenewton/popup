@@ -28,6 +28,30 @@
     float: left;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.font-lg {
+    font-size: 0.4rem;
+}
+
+.font-mid {
+    font-size: 0.32rem;
+}
+
+.font-small {
+    font-size: 0.24rem;
+}
+
+.line-height-small {
+    line-height: 0.28rem;
+}
+
+.text-indent {
+    text-indent: 2em;
+}
+
 .clearfix::before,
 .clearfix::after {
     line-height: 0;

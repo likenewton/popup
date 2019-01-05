@@ -2,14 +2,11 @@ var htmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-
 var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
-
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
-
 
 // 获取入口(entry)对象
 function getEntries(viewPath) {
@@ -51,13 +48,15 @@ function getPlugins(viewPath) {
     names: ['common', 'manifest'],
     minChunks: 2,
   })]
-  
+
   pluginMap = [...pluginMap, new CopyWebpackPlugin([{
-	from: path.resolve(__dirname, 'app/static/php'),
-	to: path.resolve(__dirname, 'build/php'),
+    from: path.resolve(__dirname, 'app/static/other'),
+    to: path.resolve(__dirname, 'build/images'),
   }])]
 
   pluginMap = [...pluginMap, new ExtractTextPlugin('[name].css')]
+
+  pluginMap = [...pluginMap, new UglifyJsPlugin()]
 
   return pluginMap;
 }
@@ -96,7 +95,7 @@ module.exports = {
     }, {
       test: /\.(eot|ttf|woff|svg)(\?.*)?(#.*)?$/,
       loader: 'url?name=fonts/[name].[ext]'
-    },]
+    }, ]
   },
 
   devServer: {

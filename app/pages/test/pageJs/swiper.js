@@ -23,7 +23,7 @@ var swiperJs = {
 
 	render(options) {
 
-		Api.Route.setDocumentTitle('swiper');
+		Api.Route.setDocumentTitle('Ailsa的旅游计划');
 
 		// dom 此时只是简单的html字符串
 		let dom = template.compile(pageTpl)({
@@ -85,34 +85,65 @@ var swiperJs = {
 			effect: 'coverflow',
 			slidesPerView: 2,
 			imgList: [
-				`${require('../../../static/img/test/carousel_04.jpg')}`,
-				`${require('../../../static/img/test/carousel_05.jpg')}`,
-				`${require('../../../static/img/test/carousel_06.jpg')}`,
-				`${require('../../../static/img/test/carousel_07.jpg')}`,
-				`${require('../../../static/img/test/carousel_08.jpg')}`,
+				`${require('../../../static/img/yinyi/yinyi_swiper_01.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_swiper_02.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_swiper_03.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_swiper_04.png')}`,
 			],
 		})
 		Components.Swiper.render({
 			dom: '.js-Swiper_1',
 			effect: 'cube',
 			imgList: [
-				`${require('../../../static/img/test/banner_01.png')}`,
-				`${require('../../../static/img/test/banner_02.jpg')}`,
+				`${require('../../../static/img/yinyi/yinyi_carousel_01.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_carousel_02.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_carousel_03.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_carousel_04.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_carousel_05.png')}`,
 			]
 		})
 		Components.Swiper.render({
 			dom: '.js-Swiper_2',
 			effect: 'flip',
 			imgList: [
-				`${require('../../../static/img/test/banner_01.png')}`,
-				`${require('../../../static/img/test/banner_02.jpg')}`,
+				`${require('../../../static/img/yinyi/yinyi_house_out_01.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_house_out_02.png')}`,
 			]
 		})
 		Components.Swiper.render({
 			dom: '.js-Swiper_3',
+			effect: 'flip',
 			imgList: [
-				`${require('../../../static/img/test/banner_01.png')}`,
-				`${require('../../../static/img/test/banner_02.jpg')}`,
+				`${require('../../../static/img/yinyi/yinyi_01.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_02.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_03.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_04.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_05.png')}`,
+			]
+		})
+		Components.Swiper.render({
+			dom: '.js-Swiper_4',
+			effect: 'coverflow',
+			slidesPerView: 1.5,
+			imgList: [
+				`${require('../../../static/img/yinyi/yinyi_li_01.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_li_02.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_li_03.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_li_04.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_li_05.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_li_06.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_li_07.png')}`,
+			]
+		})
+		Components.Swiper.render({
+			dom: '.js-Swiper_5',
+			imgList: [
+				`${require('../../../static/img/yinyi/yinyi_f_01.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_f_02.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_f_03.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_f_04.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_f_05.png')}`,
+				`${require('../../../static/img/yinyi/yinyi_f_06.png')}`,
 			]
 		})
 
